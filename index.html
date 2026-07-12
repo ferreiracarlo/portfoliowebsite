@@ -1,0 +1,254 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Meu Portfólio | Carlos Santos</title>
+    <link rel="stylesheet" href="style.css">
+    
+    <style>
+        /* Configurações da Tela de Entrada (Splash Screen) */
+        #intro-portal {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            background: radial-gradient(circle at center, #0a1128 0%, #020514 100%);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 9999;
+            overflow: hidden;
+            transition: opacity 0.8s ease-in-out, filter 0.8s ease-in-out;
+            perspective: 1500px; /* Cria a profundidade 3D para a rotação */
+        }
+
+        .portal-content {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            transform-style: preserve-3d;
+        }
+
+        /* Texto de instrução futurista */
+        .click-hint {
+            color: #00f2fe;
+            font-size: 1.1rem;
+            text-transform: uppercase;
+            letter-spacing: 3px;
+            margin-bottom: 40px;
+            text-shadow: 0 0 10px rgba(0, 242, 254, 0.6);
+            animation: pulseText 2s infinite alternate ease-in-out;
+            pointer-events: none;
+            z-index: 10;
+        }
+
+        @keyframes pulseText {
+            0% { opacity: 0.3; transform: scale(0.98); }
+            100% { opacity: 1; transform: scale(1.02); }
+        }
+
+        /* CONTAINER 3D: Faz o notebook girar continuamente como um GIF */
+        .laptop-container {
+            width: 500px;
+            max-width: 90vw;
+            transform-style: preserve-3d;
+            /* Esta animação faz o notebook girar em 360 graus e flutuar ao mesmo tempo */
+            animation: spinAndFloat 12s infinite linear;
+            cursor: pointer;
+            transition: transform 0.5s ease;
+        }
+
+        /* Animação de rotação 3D contínua (Efeito GIF Giratório) */
+        @keyframes spinAndFloat {
+            0% {
+                transform: translateY(0px) rotateY(0deg) rotateX(10deg);
+            }
+            25% {
+                transform: translateY(-10px) rotateY(90deg) rotateX(15deg);
+            }
+            50% {
+                transform: translateY(0px) rotateY(180deg) rotateX(10deg);
+            }
+            75% {
+                transform: translateY(10px) rotateY(270deg) rotateX(5deg);
+            }
+            100% {
+                transform: translateY(0px) rotateY(360deg) rotateX(10deg);
+            }
+        }
+
+        /* Imagem do notebook com brilho neon */
+        #laptop-img {
+            width: 100%;
+            height: auto;
+            display: block;
+            user-select: none;
+            -webkit-user-drag: none;
+            filter: drop-shadow(0 0 25px rgba(0, 242, 254, 0.5));
+            transition: filter 0.3s ease;
+        }
+
+        /* Aumenta o brilho quando o usuário passa o mouse */
+        .laptop-container:hover #laptop-img {
+            filter: drop-shadow(0 0 40px rgba(0, 242, 254, 0.9)) brightness(1.1);
+        }
+
+        /* EFEITOS DE TRANSIÇÃO AO CLICAR */
+
+        /* Para a rotação imediatamente e foca na tela para o zoom */
+        .stop-rotation {
+            animation: none !important;
+            transform: scale(1) rotateY(0deg) rotateX(0deg) !important;
+            transition: transform 0.4s ease-out;
+        }
+
+        /* Brilho intenso de inicialização */
+        .glow-effect {
+            filter: drop-shadow(0 0 60px rgba(0, 242, 254, 1)) brightness(1.4) !important;
+        }
+
+        /* Efeito de entrar na tela (Zoom imersivo) */
+        .zoom-in {
+            animation: cameraZoom 0.8s forwards cubic-bezier(0.7, 0, 0.3, 1);
+        }
+
+        @keyframes cameraZoom {
+            0% {
+                transform: scale(1) translateZ(0);
+                filter: blur(0px);
+            }
+            100% {
+                transform: scale(4) translateZ(400px);
+                filter: blur(8px);
+                opacity: 0;
+            }
+        }
+
+        .fade-out {
+            opacity: 0;
+            pointer-events: none;
+            filter: blur(10px);
+        }
+
+        /* Controle do Portfólio */
+        .portfolio-hidden {
+            opacity: 0;
+            visibility: hidden;
+            transform: scale(0.95);
+            transition: opacity 1s ease-out, transform 1s ease-out;
+            height: 0;
+            overflow: hidden;
+        }
+
+        .portfolio-visible {
+            opacity: 1;
+            visibility: visible;
+            transform: scale(1);
+            height: auto;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- TELA DE ENTRADA (SPLASH SCREEN) -->
+    <div id="intro-portal">
+        <div class="portal-content">
+            <p class="click-hint">Clique no notebook para inicializar o sistema</p>
+            
+            <!-- O container agora possui a animação de rotação contínua -->
+            <div class="laptop-container" id="laptop-trigger">
+                <!-- Substitua pelo caminho da sua imagem do notebook -->
+                <img id="laptop-img" src="imagens/notebook-fechado.png" alt="Notebook Inicial">
+            </div>
+        </div>
+    </div>
+
+    <!-- CONTEÚDO PRINCIPAL (Começa oculto) -->
+    <div id="main-portfolio" class="portfolio-hidden">
+        
+        <header class="hero">
+            <div class="container">
+                <h1>Olá, eu sou o Carlos Santos</h1>
+                <p class="subtitle">Desenvolvedor de Software & Criador de Soluções</p>
+                <p class="description">
+                    Focado em construir aplicações modernas, eficientes e fáceis de usar. 
+                    Conheça abaixo alguns dos meus principais projetos.
+                </p>
+            </div>
+        </header>
+
+        <main class="projects container">
+            <h2>Meus Projetos</h2>
+            <div class="projects-grid">
+                <div class="project-card">
+                    <h3>FitApp — Sistema de Academia</h3>
+                    <p>Aplicativo completo para gestão de treinos de musculação e aeróbicos com cronômetro, evolução de medidas e suporte a PWA.</p>
+                    <div class="project-links">
+                        <a href="#" class="btn primary">Acessar Web / PWA</a>
+                        <a href="#" class="btn secondary">Baixar .APK</a>
+                    </div>
+                </div>
+                <div class="project-card">
+                    <h3>Nome do Projeto 2</h3>
+                    <p>Breve descrição do que este aplicativo faz, quais tecnologias utilizou e o problema que ele resolve.</p>
+                    <div class="project-links">
+                        <a href="#" class="btn primary">Ver Projeto</a>
+                    </div>
+                </div>
+            </div>
+        </main>
+
+        <footer class="footer">
+            <div class="container">
+                <p>&copy; 2026 Carlos Santos. Criado com foco e código.</p>
+            </div>
+        </footer>
+    </div>
+
+    <script>
+        const portal = document.getElementById('intro-portal');
+        const laptopContainer = document.getElementById('laptop-trigger');
+        const laptopImg = document.getElementById('laptop-img');
+        const portfolio = document.getElementById('main-portfolio');
+
+        let isTransitioning = false;
+
+        laptopContainer.addEventListener('click', () => {
+            if (isTransitioning) return;
+            isTransitioning = true;
+
+            console.log("[EVT] Inicializando transição...");
+
+            // 1. Para a rotação 3D imediatamente e alinha o notebook de frente para o usuário
+            laptopContainer.classList.add('stop-rotation');
+
+            // 2. Após alinhar, inicia a abertura e o brilho intenso
+            setTimeout(() => {
+                console.log("[INT] Abrindo notebook...");
+                laptopImg.src = "imagens/notebook-abrindo.png"; 
+                laptopImg.classList.add('glow-effect');
+            }, 300);
+            
+            // 3. Aplica o zoom imersivo (túnel de luz) entrando na tela
+            setTimeout(() => {
+                console.log("[INT] Zoom imersivo...");
+                laptopImg.src = "imagens/notebook-zoom.png";
+                laptopContainer.classList.add('zoom-in');
+                portal.classList.add('fade-out');
+            }, 800);
+
+            // 4. Revela o portfólio completo
+            setTimeout(() => {
+                console.log("[INT] Portfólio carregado.");
+                portal.style.display = 'none'; 
+                portfolio.classList.remove('portfolio-hidden');
+                portfolio.classList.add('portfolio-visible');
+            }, 1500);
+        });
+    </script>
+</body>
+</html>

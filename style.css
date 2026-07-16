@@ -213,7 +213,7 @@ body {
 
 /* Container do notebook - Define um tamanho padrão excelente no PC */
 .laptop-container {
-    width: 500px;         /* Deixa o notebook significativamente maior e de destaque */
+    width: 1000px;         /* Deixa o notebook significativamente maior e de destaque */
     max-width: 85%;       /* Garante que não quebre o layout em telas menores ou mobile */
     margin: 0 auto;
     display: flex;

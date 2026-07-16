@@ -18,7 +18,7 @@
 }
 
 body {
-    background-color: var(--bg-color);
+    background-color:#030d20;
     color: var(--text-primary);
     line-height: 1.6;
 }
@@ -213,7 +213,7 @@ body {
 
 /* Container do notebook - Define um tamanho padrão excelente no PC */
 .laptop-container {
-    width: 1000px;         /* Deixa o notebook significativamente maior e de destaque */
+    width: 2000px;         /* Deixa o notebook significativamente maior e de destaque */
     max-width: 85%;       /* Garante que não quebre o layout em telas menores ou mobile */
     margin: 0 auto;
     display: flex;
@@ -277,4 +277,129 @@ body {
     0% { opacity: 0.4; }
     50% { opacity: 1; }
     100% { opacity: 0.4; }
+}
+
+/* ==========================================================================
+   ESTILOS DO MENU HAMBURGUER & SIDEBAR (CANTOS SUPERIOR ESQUERDO)
+   ========================================================================== */
+
+/* Botão de Ativação do Menu */
+#menu-toggle {
+    position: fixed;
+    top: 20px;
+    left: 20px;
+    width: 50px;
+    height: 50px;
+    background-color: var(--card-bg);
+    border: 1px solid var(--border-color);
+    border-radius: 50%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 5px;
+    cursor: pointer;
+    z-index: 1000;
+    transition: border-color 0.3s, transform 0.2s;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.4);
+}
+
+#menu-toggle:hover {
+    border-color: var(--accent-blue);
+    transform: scale(1.05);
+}
+
+/* Barrinhas de dentro do botão hambúrguer */
+#menu-toggle .bar {
+    width: 22px;
+    height: 2px;
+    background-color: var(--text-primary);
+    transition: transform 0.3s ease, opacity 0.3s ease, background-color 0.3s;
+}
+
+/* Transforma o Hambúrguer em um "X" quando ativo */
+#menu-toggle.active .bar:nth-child(1) {
+    transform: translateY(7px) rotate(45deg);
+    background-color: var(--accent-blue);
+}
+#menu-toggle.active .bar:nth-child(2) {
+    opacity: 0;
+}
+#menu-toggle.active .bar:nth-child(3) {
+    transform: translateY(-7px) rotate(-45deg);
+    background-color: var(--accent-blue);
+}
+
+/* Painel de Menu Lateral (Sidebar) */
+#sidebar-menu {
+    position: fixed;
+    top: 0;
+    left: -300px; /* Começa escondido para fora da tela */
+    width: 300px;
+    height: 100vh;
+    background-color: #0d1424; /* Tom azul escuro combinando com o tema */
+    border-right: 1px solid var(--border-color);
+    z-index: 999;
+    padding: 90px 25px 30px 25px;
+    transition: left 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+    box-shadow: 5px 0 25px rgba(0, 0, 0, 0.5);
+}
+
+/* Quando o menu está aberto */
+#sidebar-menu.open {
+    left: 0;
+}
+
+.sidebar-header h3 {
+    font-size: 1.1rem;
+    color: var(--text-secondary);
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    margin-bottom: 30px;
+}
+
+/* Lista de links do menu */
+.menu-links {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 18px;
+}
+
+.menu-links li a {
+    color: var(--text-primary);
+    text-decoration: none;
+    font-size: 1.05rem;
+    font-weight: 500;
+    display: block;
+    padding: 10px 14px;
+    border-radius: 6px;
+    transition: background-color 0.2s, color 0.2s, padding-left 0.2s;
+}
+
+/* Efeito luminoso futurista ao passar o mouse nos links */
+.menu-links li a:hover {
+    background-color: rgba(59, 130, 246, 0.1);
+    color: var(--accent-blue);
+    padding-left: 20px; /* Desloca o texto de leve */
+}
+
+/* Fundo escurecido que bloqueia a tela de trás quando o menu abre */
+#sidebar-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background-color: rgba(2, 5, 20, 0.6);
+    backdrop-filter: blur(3px); /* Desfoca suavemente o fundo do portfólio */
+    z-index: 998;
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.3s ease;
+}
+
+#sidebar-overlay.active {
+    opacity: 1;
+    visibility: visible;
 }

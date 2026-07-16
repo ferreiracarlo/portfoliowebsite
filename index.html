@@ -155,22 +155,45 @@
 <body>
 
     <!-- TELA DE ENTRADA (SPLASH SCREEN) -->
-    <!-- TELA DE ENTRADA (SPLASH SCREEN) -->
-<div id="intro-portal">
-    <div class="portal-content">
-        <p class="click-hint">Portfólio Carlos Santos</p>
-        
-        <!-- O container agora controla o tamanho do notebook de forma responsiva -->
-        <div class="laptop-container" id="laptop-trigger">
-            <!-- Substitua pelo caminho da sua imagem do notebook -->
-            <img id="laptop-img" src="imagens/notebook-fechado.png" alt="Notebook Inicial">
+    <div id="intro-portal">
+        <div class="portal-content">
+            <p class="click-hint" style="color: #f7f9fa; font-family:Verdana, Geneva, Tahoma, sans-serif; font-size: 1.1rem; letter-spacing: 2px; text-transform: uppercase;">Portfólio Carlos Santos</p>
+            <div class="laptop-container" id="laptop-trigger">
+                <img id="laptop-img" src="imagens/notebook-fechado.png" alt="Notebook Inicial">
+            </div>
         </div>
     </div>
-</div>
 
-    <!-- CONTEÚDO PRINCIPAL (Começa oculto) -->
+    <!-- CONTEÚDO PRINCIPAL -->
     <div id="main-portfolio" class="portfolio-hidden">
         
+        <!-- NOVO MENU FLUTUANTE DA PARTE SUPERIOR ESQUERDA -->
+        <button id="menu-toggle" aria-label="Abrir Menu">
+            <span class="bar"></span>
+            <span class="bar"></span>
+            <span class="bar"></span>
+        </button>
+
+        <nav id="sidebar-menu">
+            <div class="sidebar-header">
+                <h3>Menu de Navegação</h3>
+            </div>
+            <ul class="menu-links">
+                <!-- Substitua o '#' pelo link do seu WhatsApp/Formulário -->
+<li><a href="https://wa.me/5512988211271?text=Olá%20Carlos,%20vi%20seu%20portfólio%20e%20gostaria%20de%20conversar!" target="_blank" onclick="if(!confirm('Você realmente quer ir para o WhatsApp?')) { event.preventDefault(); } else { toggleMenu(); }">📞 Entrar em Contato</a></li>                <!-- Link para área de orçamento -->
+                <li><a href="#orcamento" onclick="toggleMenu()">💰 Pedir Orçamento</a></li>
+                <!-- Link para seção de formação/educação -->
+                <li><a href="#universidades" onclick="toggleMenu()">🎓 Universidades Cursadas</a></li>
+                <hr style="border-color: var(--border-color); margin: 15px 0;">
+                <!-- Links Externos das suas redes -->
+                <li><a href="https://github.com/" target="_blank">🖥️ GitHub</a></li>
+                <li><a href="https://linkedin.com/" target="_blank">💼 LinkedIn</a></li>
+                <li><a href="https://instagram.com/" target="_blank">📸 Instagram</a></li>
+            </ul>
+        </nav>
+        <div id="sidebar-overlay"></div>
+        <!-- FIM DO MENU -->
+
         <header class="hero">
             <div class="container">
                 <h1>Olá, eu sou o Carlos Santos</h1>
@@ -178,7 +201,7 @@
                 <p class="description">
                     Focado em construir aplicações modernas, eficientes e fáceis de usar. 
                     Conheça abaixo alguns dos meus principais projetos.
-                </p>
+                </                </p>
             </div>
         </header>
 
@@ -207,7 +230,7 @@
             <div class="container">
                 <p>&copy; 2026 Carlos Santos. Criado com foco e código.</p>
             </div>
-        </footer>
+        </footer&gt;
     </div>
 
     <script>
@@ -223,18 +246,14 @@
             isTransitioning = true;
 
             console.log("[EVT] Inicializando transição...");
-
-            // 1. Para a rotação 3D imediatamente e alinha o notebook de frente para o usuário
             laptopContainer.classList.add('stop-rotation');
 
-            // 2. Após alinhar, inicia a abertura e o brilho intenso
             setTimeout(() => {
                 console.log("[INT] Abrindo notebook...");
                 laptopImg.src = "imagens/notebook-abrindo.png"; 
                 laptopImg.classList.add('glow-effect');
             }, 300);
             
-            // 3. Aplica o zoom imersivo (túnel de luz) entrando na tela
             setTimeout(() => {
                 console.log("[INT] Zoom imersivo...");
                 laptopImg.src = "imagens/notebook-zoom.png";
@@ -242,7 +261,6 @@
                 portal.classList.add('fade-out');
             }, 800);
 
-            // 4. Revela o portfólio completo
             setTimeout(() => {
                 console.log("[INT] Portfólio carregado.");
                 portal.style.display = 'none'; 
@@ -250,6 +268,20 @@
                 portfolio.classList.add('portfolio-visible');
             }, 1500);
         });
+
+        /* FUNÇÕES DO NOVO MENU SIDEBAR */
+        const menuToggle = document.getElementById('menu-toggle');
+        const sidebarMenu = document.getElementById('sidebar-menu');
+        const sidebarOverlay = document.getElementById('sidebar-overlay');
+
+        function toggleMenu() {
+            menuToggle.classList.toggle('active');
+            sidebarMenu.classList.toggle('open');
+            sidebarOverlay.classList.toggle('active');
+        }
+
+        menuToggle.addEventListener('click', toggleMenu);
+        sidebarOverlay.addEventListener('click', toggleMenu);
     </script>
 </body>
 </html>
